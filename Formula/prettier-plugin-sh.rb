@@ -1,5 +1,3 @@
-require "language/node"
-
 class PrettierPluginSh < Formula
   desc "Opinionated shell script formatter plugin for Prettier"
   homepage "https://github.com/un-ts/prettier/tree/master/packages/sh"
@@ -14,11 +12,11 @@ class PrettierPluginSh < Formula
   depends_on "node"
 
   def install
-    system "npm", "install", *std_npm_args
+    system "npm", "install", *std_npm_args(prefix: libexec)
     bin.install_symlink Dir["#{libexec}/bin/*"]
   end
 
   test do
-    raise "Test not implemented."
+    system "node", "-e", "require(\"#{libexec}/lib/node_modules/prettier-plugin-sh/lib/index.cjs\")"
   end
 end
