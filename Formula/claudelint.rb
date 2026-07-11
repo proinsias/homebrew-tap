@@ -1,6 +1,6 @@
 require "language/node"
 
-class ClaudeCodeLint < Formula
+class Claudelint < Formula
   desc "Comprehensive linter and programmatic API for Claude Code projects - validates CLAUDE.md files, skills, settings, hooks, MCP servers, plugins, and more"
   homepage "https://claudelint.com"
   url "https://registry.npmjs.org/claude-code-lint/-/claude-code-lint-0.5.0.tgz"
