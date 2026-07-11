@@ -1,4 +1,4 @@
-class V8R < Formula
+class V8r < Formula
   desc "Command-line JSON, YAML and TOML validator that's on your wavelength"
   homepage "https://github.com/chris48s/v8r"
   url "https://registry.npmjs.org/v8r/-/v8r-6.1.0.tgz"
