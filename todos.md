@@ -9,17 +9,42 @@
     - [x] Claude workflows
     - [x] Other workflows
 - [ ] Add formulae for:
-    - [ ] 9router
-    - [ ] bash-language-server
     - [ ] fkill-cli
-    - [ ] git-guilt
+        - [ ] Test
+        - [ ] Add to README.md with URL
+        - [ ] Add to Brewfile and remove from nodejs
     - [ ] prettier-plugin-sh
-    - [ ] pyright
-    - [ ] tldr
-    - [ ] typescript-language-server
+        - [ ] Test
+        - [ ] Add to README.md with URL
+        - [ ] Add to Brewfile and remove from nodejs
     - [ ] v8r
+        - [ ] Test
+        - [ ] Add to README.md with URL
+        - [ ] Add to Brewfile and remove from nodejs
     - [ ] vscode-css-languageserver-bin
+        - [ ] Test
+        - [ ] Add to README.md with URL
+        - [ ] Add to Brewfile and remove from nodejs
     - [ ] vscode-html-languageserver-bin
+        - [ ] Test
+        - [ ] Add to README.md with URL
+        - [ ] Add to Brewfile and remove from nodejs
     - [ ] vscode-json-languageserver-bin
-    - [ ] yarn
+        - [ ] Test
+        - [ ] Add to README.md with URL
+        - [ ] Add to Brewfile and remove from nodejs
+    - [ ] 9router
+        - [ ] Add manually
+        - [ ] Test
+        - [ ] Add to README.md with URL
+        - [ ] Add to Brewfile and remove from nodejs
+    - [ ] git-guilt
+        - [ ] Add manually
+        - [ ] Test
+        - [ ] Add to README.md with URL
+        - [ ] Add to Brewfile and remove from nodejs
     - [ ] @mermaid-js/mermaid-cli
+        - [ ] Add manually
+        - [ ] Test
+        - [ ] Add to README.md with URL
+        - [ ] Add to Brewfile and remove from nodejs
