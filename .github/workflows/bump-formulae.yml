@@ -1,0 +1,32 @@
+---
+name: Bump Formulae
+
+on:
+  schedule:
+    - cron: 0 6 * * 1 # every Monday at 06:00 UTC
+  workflow_dispatch:
+
+jobs:
+  bump-formulae:
+    name: Open PRs for outdated formulae
+    runs-on: macos-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up Homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+
+      - name: brew bump --open-pr
+        run: brew bump --tap=proinsias/tap --open-pr --no-fork
+        env:
+          HOMEBREW_DEVELOPER: "1"
+          # GitHub Actions has a hard rule that workflows can't use GITHUB_TOKEN to trigger other workflows
+          # (to prevent runaway recursion), so a PR opened with the default token would silently skip CI.
+          # This is a fine-grained PAT scoped to just this repo with Contents: write and Pull requests: write.
+          HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.HOMEBREW_BUMP_TOKEN }}
