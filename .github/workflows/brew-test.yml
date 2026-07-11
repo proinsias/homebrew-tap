@@ -26,7 +26,11 @@ jobs:
         uses: Homebrew/actions/setup-homebrew@master
 
       - name: brew audit --strict --online
-        run: brew audit --strict --online Formula/*.rb
+        run: |
+          for formula_path in Formula/*.rb; do
+            formula=$(basename "${formula_path}" .rb)
+            brew audit --strict --online "proinsias/tap/${formula}"
+          done
 
       - name: brew install --build-from-source
         run: |
