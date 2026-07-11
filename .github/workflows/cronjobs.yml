@@ -1,0 +1,51 @@
+# yamllint disable-line rule:document-start
+name: Cron Jobs
+
+######################################################################
+## minute         0-59
+## hour           0-23
+## day of month   1-31
+## month          1-12
+## day of week    0-7
+######################################################################
+
+# yamllint disable-line rule:truthy
+on:
+  schedule:
+    - cron: 0 0 1 * * # every month on the first day of the month at midnight
+  # Run workflow manually (without waiting for the cron to be called),
+  # through the Github Actions Workflow page directly.
+  workflow_dispatch:
+
+jobs:
+  cronjobs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      issues: write # required for peter-evans/create-issue-from-file
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Restore lychee cache
+        uses: actions/cache@v6
+        with:
+          path: .lycheecache
+          key: cache-lychee-${{ github.run_id }}
+          restore-keys: cache-lychee-
+
+      - name: Link Checker
+        id: lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: "'https://raw.githubusercontent.com/proinsias/homebrew-tap/refs/heads/main/README.md'"
+          fail: false
+
+      - name: Create Issue From File
+        if: steps.lychee.outputs.exit_code != 0
+        uses: peter-evans/create-issue-from-file@v6
+        with:
+          title: Link Checker Report
+          content-filepath: ./lychee/out.md
+          labels: report, automated issue

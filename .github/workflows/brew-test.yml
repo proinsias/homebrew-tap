@@ -1,0 +1,46 @@
+---
+name: Homebrew Formula CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "Formula/**"
+  pull_request:
+    paths:
+      - "Formula/**"
+
+jobs:
+  formula-ci:
+    name: Audit, install, and test
+    runs-on: macos-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+
+      - name: Set up Homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+
+      - name: Tap this repository
+        run: brew tap proinsias/tap "${GITHUB_WORKSPACE}"
+
+      - name: brew audit --strict --online
+        run: brew audit --strict --online Formula/*.rb
+
+      - name: brew install --build-from-source
+        run: |
+          for formula_path in Formula/*.rb; do
+            formula=$(basename "${formula_path}" .rb)
+            brew install --build-from-source "proinsias/tap/${formula}"
+          done
+
+      - name: brew test
+        run: |
+          for formula_path in Formula/*.rb; do
+            formula=$(basename "${formula_path}" .rb)
+            brew test "proinsias/tap/${formula}"
+          done

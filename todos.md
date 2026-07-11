@@ -3,10 +3,23 @@
 - [x] Add appropriate .gitignore
 - [x] Add appropriate AGENTS.md
 - [x] Add appropriate .mise.toml
-- [ ] Add appropriate .pre-commit-config.yaml (update AGENTS.md)
-    - [ ] brew audit --strict --online <formula>
-    - [ ] brew install --build-from-source proinsias/tap/<formula>
-    - [ ] brew test proinsias/tap/<formula>
-- [ ] Set up appropriate github workflows
-    - [ ] Homebrew formulae
-    - [ ] Claude workflows
+- [x] Add appropriate .pre-commit-config.yaml (update AGENTS.md)
+- [x] Set up appropriate github workflows
+    - [x] Homebrew formulae
+    - [x] Claude workflows
+    - [x] Other workflows
+- [ ] Add formulae for:
+    - [ ] 9router
+    - [ ] bash-language-server
+    - [ ] fkill-cli
+    - [ ] git-guilt
+    - [ ] prettier-plugin-sh
+    - [ ] pyright
+    - [ ] tldr
+    - [ ] typescript-language-server
+    - [ ] v8r
+    - [ ] vscode-css-languageserver-bin
+    - [ ] vscode-html-languageserver-bin
+    - [ ] vscode-json-languageserver-bin
+    - [ ] yarn
+    - [ ] @mermaid-js/mermaid-cli
