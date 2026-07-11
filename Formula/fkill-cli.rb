@@ -1,5 +1,3 @@
-require "language/node"
-
 class FkillCli < Formula
   desc "Fabulously kill processes. Cross-platform"
   homepage "https://github.com/sindresorhus/fkill-cli#readme"
@@ -14,11 +12,11 @@ class FkillCli < Formula
   depends_on "node"
 
   def install
-    system "npm", "install", *std_npm_args
+    system "npm", "install", *std_npm_args(prefix: libexec)
     bin.install_symlink Dir["#{libexec}/bin/*"]
   end
 
   test do
-    raise "Test not implemented."
+    assert_match version.to_s, shell_output("#{bin}/fkill --version")
   end
 end

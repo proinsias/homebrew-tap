@@ -1,5 +1,3 @@
-require "language/node"
-
 class V8R < Formula
   desc "Command-line JSON, YAML and TOML validator that's on your wavelength"
   homepage "https://github.com/chris48s/v8r"
@@ -14,11 +12,11 @@ class V8R < Formula
   depends_on "node"
 
   def install
-    system "npm", "install", *std_npm_args
+    system "npm", "install", *std_npm_args(prefix: libexec)
     bin.install_symlink Dir["#{libexec}/bin/*"]
   end
 
   test do
-    raise "Test not implemented."
+    assert_match version.to_s, shell_output("#{bin}/v8r --version")
   end
 end
