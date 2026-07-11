@@ -8,31 +8,8 @@
     - [x] Homebrew formulae
     - [x] Claude workflows
     - [x] Other workflows
-- [ ] Add formulae for:
-    - [ ] fkill-cli
-        - [ ] Test
-        - [ ] Add to README.md with URL
-        - [ ] Add to Brewfile and remove from nodejs
-    - [ ] prettier-plugin-sh
-        - [ ] Test
-        - [ ] Add to README.md with URL
-        - [ ] Add to Brewfile and remove from nodejs
-    - [ ] v8r
-        - [ ] Test
-        - [ ] Add to README.md with URL
-        - [ ] Add to Brewfile and remove from nodejs
-    - [ ] 9router
-        - [ ] Add manually
-        - [ ] Test
-        - [ ] Add to README.md with URL
-        - [ ] Add to Brewfile and remove from nodejs
-    - [ ] git-guilt
-        - [ ] Add manually
-        - [ ] Test
-        - [ ] Add to README.md with URL
-        - [ ] Add to Brewfile and remove from nodejs
-    - [ ] @mermaid-js/mermaid-cli
-        - [ ] Add manually
-        - [ ] Test
-        - [ ] Add to README.md with URL
-        - [ ] Add to Brewfile and remove from nodejs
+- [x] Add formulae for:
+    - [x] claudelint
+    - [x] fkill-cli
+    - [x] prettier-plugin-sh
+    - [x] v8r

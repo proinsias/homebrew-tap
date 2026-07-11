@@ -29,17 +29,21 @@ uvx --from md-toc md_toc --in-place github -- README.md
 ├── README.md                  # Project documentation
 ├── AGENTS.md                  # AI coding assistant instructions
 └── Formula/                   # Homebrew formula
-    └── claudelint.rb          # https://github.com/pdugan20/claudelint
+    ├── claudelint.rb          # https://github.com/pdugan20/claudelint
+    ├── fkill-cli.rb           # https://github.com/sindresorhus/fkill-cli
+    ├── prettier-plugin-sh.rb  # https://www.npmjs.com/package/prettier-plugin-sh
+    └── v8r.rb                 # https://github.com/chris48s/v8r
 ```
 
 <!-- editorconfig-checker-enable -->
 
 ## Installing these tools
 
+For example:
+
 ```shell
 brew tap proinsias/tap
 
-# https://github.com/pdugan20/claudelint
 brew install proinsias/tap/claudelint
 
 ```
@@ -62,11 +66,10 @@ prek install --install-hooks --allow-missing-config
 ### Adding a new formula
 
 1. Create `Formula/<name>.rb` using the conventions above.
-2. Sync to the tap directory and fix permissions.
-3. Run `brew audit --strict --online <formula>` — fix all findings.
-4. Run `brew install --build-from-source proinsias/tap/<formula>`.
-5. Run `brew test proinsias/tap/<formula>`.
-6. Commit with a `feat:` conventional commit message.
+2. Run `brew audit --strict --online <formula>` — fix all findings.
+3. Run `brew install --build-from-source proinsias/tap/<formula>`.
+4. Run `brew test proinsias/tap/<formula>`.
+5. Commit with a `feat:` conventional commit message.
 
 ### Updating an existing formula
 

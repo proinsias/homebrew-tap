@@ -28,27 +28,9 @@ brew audit --strict --online <formula>
 
 All findings must be resolved. Do not commit with open audit errors.
 
-After changes to the installed tap copy (see [Sync](#sync) below):
-
 ```bash
-brew install --build-from-source proinsias/tap/<formula>
-brew test proinsias/tap/<formula>
-```
-
-## Sync
-
-Homebrew reads formulas from its own tap clone at:
-
-```text
-/opt/homebrew/Library/Taps/proinsias/homebrew-tap/
-```
-
-After editing `Formula/*.rb` in this repo, sync and fix permissions before
-auditing or installing:
-
-```bash
-cp Formula/<formula>.rb /opt/homebrew/Library/Taps/proinsias/homebrew-tap/Formula/<formula>.rb
-chmod a+r /opt/homebrew/Library/Taps/proinsias/homebrew-tap/Formula/<formula>.rb
+brew install <formula>
+brew test <formula>
 ```
 
 ## Formula conventions
