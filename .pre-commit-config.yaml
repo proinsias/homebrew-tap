@@ -1,0 +1,150 @@
+# editorconfig-checker-disable-file
+# files: 'directory1/directory2'
+
+default_install_hook_types:
+  - commit-msg
+  - prepare-commit-msg
+  - pre-commit
+  - pre-merge-commit
+  - pre-push
+  - pre-rebase
+  - post-checkout
+  - post-commit
+  - post-merge
+  - post-rewrite
+
+repos:
+  # General
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-executables-have-shebangs
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: check-toml
+      - id: check-xml
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: fix-byte-order-marker
+      - id: mixed-line-ending # Replaces or checks mixed line ending.
+      - id: trailing-whitespace
+
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v4.0.0-alpha.8
+    hooks:
+      # Opinionated code formatter.
+      - id: prettier
+        stages: [pre-commit]
+
+  # Git
+
+  - repo: https://github.com/sirwart/ripsecrets
+    rev: v0.1.11 # Use latest tag on GitHub
+    hooks:
+      - id:
+          ripsecrets
+          # uncomment to check additional patterns
+          # args:
+          # - --additional-pattern 'mytoken*'
+          # - --additional-pattern 'mykey*'
+        exclude: ^src/dsa_utils_snowflake/
+
+  - repo: https://github.com/rhysd/actionlint
+    rev: v1.7.12
+    hooks:
+      # Static checker for GitHub Actions workflow files.
+      - id: actionlint
+        args:
+          - -ignore
+          - string should not be empty
+        exclude: ^.*\.lock\.yml$
+
+  # Json
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      # Verify json syntax.
+      - id: check-json
+
+  - repo: https://github.com/sirosen/check-jsonschema
+    rev: 0.37.3
+    hooks:
+      # json schema validation
+      - id: check-github-actions
+      - id: check-github-workflows
+        exclude: \.lock\.yml$
+
+  # Shell
+
+  - repo: https://github.com/scop/pre-commit-shfmt
+    rev: v3.13.1-1
+    hooks:
+      - id: shfmt
+
+  - repo: https://github.com/koalaman/shellcheck-precommit
+    rev: v0.11.0
+    hooks:
+      - id:
+          shellcheck
+          # Use mise-provided tool for GitHub Actions.
+        language: system
+        entry: shellcheck
+
+  # YAML
+
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.38.0
+    hooks:
+      # Linter for YAML files.
+      - id: yamllint
+        args: [-c=.yamllint.yml]
+
+  - repo: local
+    hooks:
+      - id: mise-tasks-validate
+        name: Validate mise tasks
+        entry: mise tasks validate
+        language: unsupported
+        files: .mise.toml
+        pass_filenames: false
+
+  # General
+  - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
+    rev: 3.6.1
+    hooks:
+      - id: editorconfig-checker
+        exclude: ^src/dsa_utils_snowflake/
+
+  # Markdown
+  - repo: local
+    hooks:
+      - id: md-toc
+        name: Update markdown table of contents
+        description:
+          "Automatically generate and add a table of contents to markdown files"
+        language: python
+        types: [markdown] # as detected by pre-commit with identify-cli
+        entry: uvx --from md-toc md_toc
+        args: [--in-place, --no-indentation, github]
+        files: "README.md"
+
+  - repo: https://github.com/lycheeverse/lychee.git
+    rev: lychee-v0.24.2
+    hooks:
+      - id: lychee
+        files: \.(md|txt)$
+        exclude: \.github/(workflows|agents)/
+        args: [--config, lychee.toml]
+
+  # brew
+  - repo: local
+    hooks:
+      - id: brew-style
+        name: brew style
+        language: system
+        entry: brew style --fix
+        types: [ruby]

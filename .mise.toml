@@ -1,0 +1,29 @@
+# Don't put credentials or other secrets into this shared file!
+[env]
+dotenv = ".env"   # auto-load .env file
+DOTENV_CONFIG_QUIET = "true"   # suppress dotenvx "injected env" tip messages
+
+[hooks]
+enter = "mise i -q"
+
+[settings]
+env_file = ".env"
+experimental = true
+gpg_verify = true
+python.uv_venv_auto = false  # Global config enables this; disable here to keep mise shims first in PATH.
+status.missing_tools = "always"
+status.show_env = true
+
+[tasks.lint]
+description = 'Run all linters'
+run = 'prek run --all-files --color always'
+
+[tools]
+actionlint = "1.7.12"
+editorconfig-checker = "3.7.0"
+node = "26.4.0"
+prek = "0.4.5"
+prettier = "3.8.4"
+shellcheck = "0.11.0"
+shfmt = "3.13.1"
+yamllint = "1.38.0"

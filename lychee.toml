@@ -1,0 +1,13 @@
+# Lychee link checker configuration
+# https://lychee.cli.rs/usage/configuration/
+
+# Exclude patterns
+exclude = [
+    "^https://registry.npmjs.org/",
+]
+
+# Maximum number of redirects
+max_redirects = 5
+
+# Request timeout in seconds
+timeout = 20
