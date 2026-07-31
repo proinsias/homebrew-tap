@@ -15,6 +15,16 @@ default_install_hook_types:
 
 repos:
   # General
+  - repo: local
+    hooks:
+      # Keep hook `rev`s in this file up to date
+      - id: prek-autoupdate
+        name: prek autoupdate
+        entry: prek autoupdate
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-push]
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
@@ -71,7 +81,7 @@ repos:
       - id: check-json
 
   - repo: https://github.com/sirosen/check-jsonschema
-    rev: 0.37.3
+    rev: 0.37.4
     hooks:
       # json schema validation
       - id: check-github-actions
@@ -133,7 +143,7 @@ repos:
         files: "README.md"
 
   - repo: https://github.com/lycheeverse/lychee.git
-    rev: lychee-v0.24.2
+    rev: v0.15.1
     hooks:
       - id: lychee
         files: \.(md|txt)$
