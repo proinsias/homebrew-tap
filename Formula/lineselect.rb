@@ -10,9 +10,15 @@ class Lineselect < Formula
   end
 
   depends_on "node"
+  conflicts_with "lineselect-rs", because: "both install a `lineselect` binary"
 
   def install
     system "npm", "install", *std_npm_args(prefix: libexec)
     bin.install_symlink Dir["#{libexec}/bin/*"]
+  end
+
+  test do
+    output = shell_output("#{bin}/lineselect 2>&1", 1)
+    assert_match "requires stdin to be a readable pipe", output
   end
 end
