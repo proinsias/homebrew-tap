@@ -21,6 +21,7 @@ run = 'prek run --all-files --color always'
 [tools]
 actionlint = "1.7.12"
 editorconfig-checker = "3.8.0"
+lychee = "0.24.2"
 node = "26.5.0"
 prek = "0.4.9"
 prettier = "3.9.5"
