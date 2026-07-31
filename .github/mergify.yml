@@ -1,0 +1,47 @@
+---
+queue_rules:
+  - name: default
+    queue_conditions:
+      - base=master
+      - or:
+          - author~=proinsias
+          - author~=github-actions
+          - author~=dependabot
+      - check-success-or-neutral=Deadpendency Check
+    merge_conditions:
+      - check-success-or-neutral=Deadpendency Check
+    merge_method: merge
+
+pull_request_rules:
+  - name: warn on conflicts
+    conditions:
+      - conflict
+    actions:
+      comment:
+        message: "@{{author}} this pull request is now in conflict 😩"
+      label:
+        add:
+          - conflict
+  - name: automatic merge on CI success
+    conditions:
+      - base=master
+      - or:
+          - author~=proinsias
+          - author~=github-actions
+          - author~=dependabot
+      - check-success-or-neutral=Deadpendency Check
+    actions:
+      queue:
+        name: default
+
+priority_rules:
+  - name: priority for github-actions bot PRs
+    conditions:
+      - author~=github-actions
+    priority: 2500
+    allow_checks_interruption: true
+  - name: priority for Dependabot PRs
+    conditions:
+      - author~=dependabot
+    priority: 2250
+    allow_checks_interruption: true
