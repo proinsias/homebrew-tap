@@ -17,8 +17,8 @@ on:
     types: [created]
 
 concurrency:
-   group: repo-assist
-   cancel-in-progress: false
+  group: repo-assist
+  cancel-in-progress: false
 
 jobs:
   repo-assist:

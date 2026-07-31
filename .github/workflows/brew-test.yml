@@ -20,28 +20,58 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v7
         with:
-          fetch-depth: 1
+          fetch-depth: 0
 
       - name: Set up Homebrew
         uses: Homebrew/actions/setup-homebrew@master
 
+      - name: Determine changed formulae
+        id: changed
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            base_sha="${{ github.event.pull_request.base.sha }}"
+          else
+            base_sha="${{ github.event.before }}"
+          fi
+
+          changed=""
+          if [ -n "${base_sha}" ] && git rev-parse --verify --quiet "${base_sha}^{commit}" >/dev/null; then
+            changed=$(git diff --name-only "${base_sha}" "${{ github.sha }}" -- 'Formula/*.rb')
+          fi
+
+          # Fall back to auditing every formula when there's no usable base
+          # (e.g. force-push, new branch, or workflow_dispatch) so we never
+          # silently skip a formula.
+          if [ -z "${changed}" ]; then
+            changed=$(ls Formula/*.rb)
+          fi
+
+          {
+            echo "formulae<<FORMULAE_EOF"
+            echo "${changed}"
+            echo "FORMULAE_EOF"
+          } >> "$GITHUB_OUTPUT"
+
       - name: brew audit --strict --online
         run: |
-          for formula_path in Formula/*.rb; do
+          while IFS= read -r formula_path; do
+            [ -z "${formula_path}" ] && continue
             formula=$(basename "${formula_path}" .rb)
             brew audit --strict --online "proinsias/tap/${formula}"
-          done
+          done <<< "${{ steps.changed.outputs.formulae }}"
 
       - name: brew install --build-from-source
         run: |
-          for formula_path in Formula/*.rb; do
+          while IFS= read -r formula_path; do
+            [ -z "${formula_path}" ] && continue
             formula=$(basename "${formula_path}" .rb)
             brew install --build-from-source "proinsias/tap/${formula}"
-          done
+          done <<< "${{ steps.changed.outputs.formulae }}"
 
       - name: brew test
         run: |
-          for formula_path in Formula/*.rb; do
+          while IFS= read -r formula_path; do
+            [ -z "${formula_path}" ] && continue
             formula=$(basename "${formula_path}" .rb)
             brew test "proinsias/tap/${formula}"
-          done
+          done <<< "${{ steps.changed.outputs.formulae }}"
