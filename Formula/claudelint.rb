@@ -1,8 +1,8 @@
 class Claudelint < Formula
   desc "Linter and API for Claude Code projects"
   homepage "https://claudelint.com"
-  url "https://registry.npmjs.org/claude-code-lint/-/claude-code-lint-0.5.0.tgz"
-  sha256 "53ae5667fdb53800a58990963ac1340452e7420b9c747aa8d74bc4e09f49a7b4"
+  url "https://registry.npmjs.org/claude-code-lint/-/claude-code-lint-0.7.0.tgz"
+  sha256 "0ce6d45098e7919295a561470900ca2a283a099f3fe912c0704b4e4ce95d8018"
   license "MIT"
 
   livecheck do
