@@ -1,10 +1,25 @@
+# See https://github.com/lycheeverse/lychee/blob/master/lychee.example.toml .
+
 # Lychee link checker configuration
 # https://lychee.cli.rs/usage/configuration/
+
+cache = true
 
 # Exclude patterns
 exclude = [
     "^https://registry.npmjs.org/",
 ]
+
+exclude_loopback = true
+
+github_token = "${LYCHEE_GITHUB_TOKEN}"
+
+# Show host statistics
+host_stats = true
+
+# Enable the checking of fragments in links, both anchor fragments and text fragments.
+# See <https://developer.mozilla.org/en-US/docs/Web/URI/Reference/Fragment/Text_fragments>
+include_fragments = "full"
 
 # Maximum number of redirects
 max_redirects = 5
