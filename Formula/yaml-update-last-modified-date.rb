@@ -7,4 +7,22 @@ class YamlUpdateLastModifiedDate < Formula
   def install
     bin.install "yaml-update-last-modified-date"
   end
+
+  test do
+    system "git", "init"
+    system "git", "config", "user.email", "test@example.com"
+    system "git", "config", "user.name", "Test"
+
+    (testpath/"test.md").write <<~EOS
+      ---
+      last_modified_at: 2020-01-01 00:00:00
+      ---
+      # Hello
+    EOS
+    system "git", "add", "test.md"
+
+    output = shell_output(bin/"yaml-update-last-modified-date")
+    assert_match "Updated modified date for test.md.", output
+    refute_match "last_modified_at: 2020-01-01 00:00:00", (testpath/"test.md").read
+  end
 end
