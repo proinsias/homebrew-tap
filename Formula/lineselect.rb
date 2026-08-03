@@ -1,8 +1,8 @@
 class Lineselect < Formula
   desc "Shell utility to interactively select lines from stdin"
   homepage "https://github.com/chfritz/lineselect"
-  url "https://registry.npmjs.org/lineselect/-/lineselect-0.1.6.tgz"
-  sha256 "e1bba422137332e7d0369757ed2e17a3201827546263891a868096f67f7ffff0"
+  url "https://registry.npmjs.org/lineselect/-/lineselect-0.2.1.tgz"
+  sha256 "f496344ca1f7ed42e9e9b21eb42b2307d6a719bbbf7b1f6da8dfdfb0522fa6f5"
   license "MIT"
 
   livecheck do

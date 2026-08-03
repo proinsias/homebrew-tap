@@ -11,19 +11,18 @@ on:
       - "Formula/**"
 
 jobs:
-  formula-ci:
-    name: Audit, install, and test
+  detect-changes:
+    name: Determine changed formulae
     runs-on: macos-latest
-    timeout-minutes: 30
+    timeout-minutes: 5
+    outputs:
+      formulae: ${{ steps.changed.outputs.formulae }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
         with:
           fetch-depth: 0
-
-      - name: Set up Homebrew
-        uses: Homebrew/actions/setup-homebrew@master
 
       - name: Determine changed formulae
         id: changed
@@ -46,32 +45,48 @@ jobs:
             changed=$(ls Formula/*.rb)
           fi
 
-          {
-            echo "formulae<<FORMULAE_EOF"
-            echo "${changed}"
-            echo "FORMULAE_EOF"
-          } >> "$GITHUB_OUTPUT"
+          formulae=$(
+            printf '%s\n' "${changed}" |
+              sed -e 's#^Formula/##' -e 's#\.rb$##' |
+              jq -R -s -c 'split("\n") | map(select(length > 0))'
+          )
+
+          echo "formulae=${formulae}" >> "$GITHUB_OUTPUT"
+
+  formula-ci:
+    name: Audit, install, and test (${{ matrix.formula }})
+    needs: detect-changes
+    if: needs.detect-changes.outputs.formulae != '[]'
+    runs-on: macos-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        formula: ${{ fromJson(needs.detect-changes.outputs.formulae) }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Set up Homebrew
+        uses: Homebrew/actions/setup-homebrew@1f8e202ffddf94def7f42f6fa3a482e821489f9c # 2026.07.10.1
+
+      - name: Cache Homebrew downloads
+        uses: actions/cache@v6
+        with:
+          path: ~/Library/Caches/Homebrew
+          key: brew-cache-${{ runner.os }}-${{ hashFiles('Formula/*.rb') }}
+          restore-keys: |
+            brew-cache-${{ runner.os }}-
 
       - name: brew audit --strict --online
-        run: |
-          while IFS= read -r formula_path; do
-            [ -z "${formula_path}" ] && continue
-            formula=$(basename "${formula_path}" .rb)
-            brew audit --strict --online "proinsias/tap/${formula}"
-          done <<< "${{ steps.changed.outputs.formulae }}"
+        run: brew audit --strict --online "proinsias/tap/${{ matrix.formula }}"
 
       - name: brew install --build-from-source
-        run: |
-          while IFS= read -r formula_path; do
-            [ -z "${formula_path}" ] && continue
-            formula=$(basename "${formula_path}" .rb)
-            brew install --build-from-source "proinsias/tap/${formula}"
-          done <<< "${{ steps.changed.outputs.formulae }}"
+        run:
+          brew install --build-from-source "proinsias/tap/${{ matrix.formula }}"
 
       - name: brew test
-        run: |
-          while IFS= read -r formula_path; do
-            [ -z "${formula_path}" ] && continue
-            formula=$(basename "${formula_path}" .rb)
-            brew test "proinsias/tap/${formula}"
-          done <<< "${{ steps.changed.outputs.formulae }}"
+        run: brew test "proinsias/tap/${{ matrix.formula }}"
