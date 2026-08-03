@@ -4,7 +4,10 @@ class YamlUpdateLastModifiedDate < Formula
   url "https://github.com/proinsias/yaml-update-last-modified-date/archive/refs/tags/v1.1.2.tar.gz"
   sha256 "a09ac7cbaac4265330e8a08aba8824f5b59cd064f1101c14335194e4c616580d"
 
+  depends_on "bash"
+
   def install
+    inreplace "yaml-update-last-modified-date", "#!/usr/bin/env bash", "#!#{formula_opt_bin("bash")}/bash"
     bin.install "yaml-update-last-modified-date"
   end
 
