@@ -13,6 +13,6 @@ class LineselectRs < Formula
   end
 
   test do
-    system "#{bin}/lineselect", "--help"
+    assert_match version.to_s, shell_output("#{bin}/lineselect --version")
   end
 end
