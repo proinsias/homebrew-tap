@@ -26,13 +26,17 @@ uvx --from md-toc md_toc --in-place github -- README.md
 ## Repository layout
 
 ```text
-├── README.md                  # Project documentation
-├── AGENTS.md                  # AI coding assistant instructions
-└── Formula/                   # Homebrew formula
-    ├── claudelint.rb          # https://github.com/pdugan20/claudelint
-    ├── fkill-cli.rb           # https://github.com/sindresorhus/fkill-cli
-    ├── prettier-plugin-sh.rb  # https://www.npmjs.com/package/prettier-plugin-sh
-    └── v8r.rb                 # https://github.com/chris48s/v8r
+├── README.md                             # Project documentation
+├── AGENTS.md                             # AI coding assistant instructions
+└── Formula/                              # Homebrew formula
+    ├── carbon-now-cli.rb                 # https://github.com/mixn/carbon-now-cli
+    ├── claudelint.rb                     # https://claudelint.com
+    ├── fkill-cli.rb                      # https://github.com/sindresorhus/fkill-cli
+    ├── lineselect-rs.rb                  # https://github.com/urbanogilson/lineselect
+    ├── lineselect.rb                     # https://github.com/chfritz/lineselect
+    ├── prettier-plugin-sh.rb             # https://github.com/un-ts/prettier/tree/master/packages/sh
+    ├── v8r.rb                            # https://github.com/chris48s/v8r
+    └── yaml-update-last-modified-date.rb # https://github.com/proinsias/yaml-update-last-modified-date
 ```
 
 <!-- editorconfig-checker-enable -->
@@ -74,4 +78,4 @@ prek install --install-hooks --allow-missing-config
 ### Updating an existing formula
 
 1. Update `url` and `sha256` in `Formula/<name>.rb`.
-2. Follow steps 2–6 above, using `fix:` or `chore:` as appropriate.
+2. Follow steps 2–5 above, using `fix:` or `chore:` as appropriate.
