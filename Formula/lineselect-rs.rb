@@ -5,6 +5,10 @@ class LineselectRs < Formula
   sha256 "f6b4cb9e6a6a6b39859281c166f31177599314ebc71daa16dcf9a80153950818"
   license "MIT"
 
+  livecheck do
+    url :stable
+  end
+
   depends_on "rust" => :build
   conflicts_with "lineselect", because: "both install a `lineselect` binary"
 
@@ -13,6 +17,6 @@ class LineselectRs < Formula
   end
 
   test do
-    system "#{bin}/lineselect", "--help"
+    assert_match version.to_s, shell_output("#{bin}/lineselect --version")
   end
 end
