@@ -20,7 +20,7 @@ run = 'prek run --all-files --color always'
 
 [tools]
 actionlint = "1.7.12"
-editorconfig-checker = "4.0.1"
+editorconfig-checker = "3.11.2"
 lychee = "0.24.2"
 node = "26.8.2"
 prek = "0.5.2"
