@@ -60,7 +60,6 @@ repos:
           # args:
           # - --additional-pattern 'mytoken*'
           # - --additional-pattern 'mykey*'
-        exclude: ^src/dsa_utils_snowflake/
 
   - repo: https://github.com/rhysd/actionlint
     rev: v1.7.12
@@ -127,7 +126,6 @@ repos:
     rev: 3.11.1
     hooks:
       - id: editorconfig-checker
-        exclude: ^src/dsa_utils_snowflake/
 
   # Markdown
   - repo: local
