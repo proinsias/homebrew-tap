@@ -25,7 +25,7 @@ jobs:
       - name: Cache Homebrew downloads
         uses: actions/cache@v6
         with:
-          path: ~/Library/Caches/Homebrew
+          path: ~/.cache/Homebrew
           key: brew-cache-${{ runner.os }}-${{ hashFiles('Formula/*.rb') }}
           restore-keys: |
             brew-cache-${{ runner.os }}-
