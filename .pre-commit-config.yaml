@@ -81,7 +81,7 @@ repos:
       - id: check-json
 
   - repo: https://github.com/sirosen/check-jsonschema
-    rev: 0.37.4
+    rev: 0.38.2
     hooks:
       # json schema validation
       - id: check-github-actions
@@ -91,7 +91,7 @@ repos:
   # Shell
 
   - repo: https://github.com/scop/pre-commit-shfmt
-    rev: v3.13.1-1
+    rev: v3.14.1-1
     hooks:
       - id: shfmt
 
@@ -124,7 +124,7 @@ repos:
 
   # General
   - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
-    rev: 3.6.1
+    rev: 3.11.1
     hooks:
       - id: editorconfig-checker
         exclude: ^src/dsa_utils_snowflake/
