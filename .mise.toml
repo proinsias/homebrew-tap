@@ -20,12 +20,12 @@ run = 'prek run --all-files --color always'
 
 [tools]
 actionlint = "1.7.12"
-editorconfig-checker = "3.11.2"
+editorconfig-checker = "4.0.2"
 lychee = "0.24.2"
-node = "26.8.2"
-prek = "0.5.2"
-prettier = "3.9.6"
+node = "26.10.0"
+prek = "0.5.4"
+prettier = "3.9.9"
 shellcheck = "0.11.0"
 shfmt = "3.14.1"
-uv = "0.12.12"
+uv = "0.12.22"
 yamllint = "1.38.0"
