@@ -1,8 +1,8 @@
 class PrettierPluginSh < Formula
   desc "Opinionated shell script formatter plugin for Prettier"
   homepage "https://github.com/un-ts/prettier/tree/master/packages/sh"
-  url "https://registry.npmjs.org/prettier-plugin-sh/-/prettier-plugin-sh-0.19.0.tgz"
-  sha256 "e34e85390d5c67d8f4e54b2d41f2ac7dfec8df21a7e3765891af563899154217"
+  url "https://registry.npmjs.org/prettier-plugin-sh/-/prettier-plugin-sh-0.20.2.tgz"
+  sha256 "0be0660b1429698839d87c9c14db4f6e29138357ab0a153061110ba2056e84a5"
   license "MIT"
 
   livecheck do
