@@ -1,8 +1,8 @@
 class LineselectRs < Formula
   desc "Interactive line selector for the terminal"
   homepage "https://github.com/urbanogilson/lineselect"
-  url "https://static.crates.io/crates/lineselect/lineselect-0.2.0.crate"
-  sha256 "f6b4cb9e6a6a6b39859281c166f31177599314ebc71daa16dcf9a80153950818"
+  url "https://static.crates.io/crates/lineselect/lineselect-0.2.3.crate"
+  sha256 "8554916ef81803cb625770c6ee84a42e68b1b9a97f0b758b915985238bc76e39"
   license "MIT"
 
   livecheck do
